@@ -1,0 +1,9 @@
+version: "1"
+services:
+  scrapy:
+    image: valentinvolkov/scrapy:csv
+    container_name: scrapy
+    volumes:
+      - ./spiders:/home/scrapy_basic/scrapy_basic/spiders
+    environment:
+      - SPIDER_NAME=test
