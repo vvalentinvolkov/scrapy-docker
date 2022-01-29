@@ -7,8 +7,17 @@ platform:
   arch: arm64
 
 steps:
-- name: greeting
-  image: alpine
+- name: test
+  image: python:3.9.9-bullseye
   commands:
   - echo hello
   - echo world
+
+steps:
+- name: docker  
+  image: plugins/docker
+  settings:
+    username: valentinvolkov
+    password: uHFVJNFl0
+    repo: valentinvolkov/scrapy
+    tags: latest
