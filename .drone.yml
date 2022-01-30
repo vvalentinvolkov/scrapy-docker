@@ -8,13 +8,12 @@ platform:
 
 steps:
 - name: test
-  image: python:3.9.9-bullseye
+  image: python:3.10-bullseye
   commands:
   - echo hello
   - echo world
 
-steps:
-- name: docker  
+- name: docker
   image: plugins/docker
   settings:
     username: valentinvolkov
