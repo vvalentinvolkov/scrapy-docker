@@ -1,5 +1,3 @@
-import os
-
 from scrapy import Spider, Request
 
 
