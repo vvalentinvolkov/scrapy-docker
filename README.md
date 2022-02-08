@@ -2,25 +2,30 @@
 ---
 # Dockerfile #
 
-    FROM python:3.9.9-bullseye
+    FROM python:3.10-bullseye
 
     WORKDIR /home/scrapy_basic
-
+    
     RUN pip install scrapy
-
+    
     COPY ./scrapy_basic .
-
+    
     VOLUME ./scrapy_basic/spiders
+    
+    CMD echo "hello"
 
-    CMD scrapy crawl $SPIDER_NAME
+# Settings #
 
-# Default settings #
     CLOSESPIDER_TIMEOUT = 300 
+    CLOSESPIDER_ITEMCOUNT
+    CLOSESPIDER_PAGECOUN
+    CLOSESPIDER_ERRORCOUNT
     LOG_LEVEL = 'INFO'
+    HTTP_POST_URL
 
 # Usage #
 
-**Spider** - The mounted directory must contain SPIDER_NAME.py with scrapy spider which's name is the same.
+**Spider** - The mounted directory must contain SPIDER_NAME.py with scrapy spider which name is the same.
 
 **Output** - There will be output file.
 

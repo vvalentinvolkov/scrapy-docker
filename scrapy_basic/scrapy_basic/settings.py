@@ -37,6 +37,12 @@ EXTENSIONS = {
     'scrapy.extensions.closespider.CloseSpider': 100,
 }
 
-#ITEM_PIPELINES = {
-#    'scrapy_basic.pipelines.ScrapyBasicPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'scrapy_basic.pipelines.HttpPostPipeline': 300,
+}
+
+HTTP_POST_URL = os.environ["HTTP_POST_URL"]
+HTTP_POST_HEADERS = {
+    'Authorization': f'Token {os.environ["HTTP_POST_AUTH_TOKEN"]}',
+    'Content-type': 'application/json'
+}

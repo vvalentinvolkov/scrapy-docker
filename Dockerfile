@@ -1,8 +1,13 @@
 FROM python:3.10-bullseye
 
-WORKDIR /home/scrapy_basic
+WORKDIR /code/scrapy_basic
 
-RUN pip install scrapy
+COPY ./pyproject.toml /code
+COPY ./poetry.lock /code
+
+RUN pip install --no-cache-dir --upgrade poetry ; \
+    poetry config virtualenvs.create false ; \
+    poetry install
 
 COPY ./scrapy_basic .
 

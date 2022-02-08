@@ -1,13 +1,31 @@
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+import logging
+
+import requests
+from scrapy.exceptions import CloseSpider, DropItem
+
+logger = logging.getLogger(__name__)
 
 
-# useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
+class HttpPostPipeline:
+    """Send dict item by POST request to HTTP_POST_URL with HTTP_POST_HEADERS"""
+    url: str
+    headers: dict
 
+    def open_spider(self, spider):
+        try:
+            self.url = spider.settings['HTTP_POST_URL']
+            self.headers = spider.settings['HTTP_POST_HEADERS']
+        except KeyError:
+            logger.error('HTTP_POST_URL and HTTP_POST_HEADERS are required')
+            raise CloseSpider
 
-class ScrapyBasicPipeline:
     def process_item(self, item, spider):
-        return item
+        response = requests.post(self.url, data=item, headers=self.headers)
+        logger.debug(response)
+        # TODO: Close spider when bad status code
+        if 200 <= response.status_code < 300:
+            return item
+        else:
+            logger.info(f'Response status - {response.status_code}. DropItem')
+            raise DropItem
+
