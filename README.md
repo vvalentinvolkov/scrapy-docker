@@ -12,7 +12,7 @@
     
     VOLUME ./scrapy_basic/spiders
     
-    CMD echo "hello"
+    CMD scrapy crawl test
 
 # Settings #
 
@@ -21,7 +21,6 @@
     CLOSESPIDER_PAGECOUN
     CLOSESPIDER_ERRORCOUNT
     LOG_LEVEL = 'INFO'
-    HTTP_POST_URL
 
 # Usage #
 

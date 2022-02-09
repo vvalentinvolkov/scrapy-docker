@@ -13,4 +13,4 @@ COPY ./scrapy_basic .
 
 VOLUME ./scrapy_basic/spiders
 
-CMD echo "hello"
+CMD scrapy crawl test

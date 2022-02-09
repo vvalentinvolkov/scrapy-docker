@@ -6,8 +6,8 @@ log_file_path = f'scrapy_basic/spiders/{SPIDER_NAME}.log'
 LOG_LEVEL = 'INFO'
 LOG_FILE = log_file_path if os.path.exists(log_file_path) else None
 
-FEED_FORMAT = 'csv'
-FEED_URI = f'scrapy_basic/spiders/{SPIDER_NAME}.csv'
+# FEED_FORMAT = 'csv'
+# FEED_URI = f'scrapy_basic/spiders/{SPIDER_NAME}.csv'
 # FEED_EXPORT_FIELDS = []
 
 SPIDER_MODULES = ['scrapy_basic.spiders']
@@ -39,10 +39,4 @@ EXTENSIONS = {
 
 ITEM_PIPELINES = {
    'scrapy_basic.pipelines.HttpPostPipeline': 300,
-}
-
-HTTP_POST_URL = os.environ["HTTP_POST_URL"]
-HTTP_POST_HEADERS = {
-    'Authorization': f'Token {os.environ["HTTP_POST_AUTH_TOKEN"]}',
-    'Content-type': 'application/json'
 }

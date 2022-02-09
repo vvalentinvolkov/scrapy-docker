@@ -8,8 +8,6 @@ logger = logging.getLogger(__name__)
 
 class HttpPostPipeline:
     """Send dict item by POST request to HTTP_POST_URL with HTTP_POST_HEADERS"""
-    url: str
-    headers: dict
 
     def open_spider(self, spider):
         try:
@@ -20,12 +18,13 @@ class HttpPostPipeline:
             raise CloseSpider
 
     def process_item(self, item, spider):
-        response = requests.post(self.url, data=item, headers=self.headers)
-        logger.debug(response)
-        # TODO: Close spider when bad status code
-        if 200 <= response.status_code < 300:
+        response = requests.post(self.url, json=item, headers=self.headers)
+        if response.status_code < 400:
             return item
-        else:
+        elif response.status_code == 400:
             logger.info(f'Response status - {response.status_code}. DropItem')
             raise DropItem
+        else:
+            logger.error(f'Response status - {response.status_code}. CloseSpider')
+            raise CloseSpider
 

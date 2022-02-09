@@ -1,11 +1,12 @@
 version: "1"
 services:
   scrapy:
-    image: valentinvolkov/scrapy:1.1
+    image: scrapy-test
     container_name: scrapy
     volumes:
       - ./spiders:/code/scrapy_basic/scrapy_basic/spiders
     environment:
       - SPIDER_NAME=test
-      - AUTH_TOKEN=test
-      - HTTP_POST_URL=https://content-bulk.online/zen_article/
+      - HTTP_POST_AUTH_TOKEN=bf2da524cd02dd452fcfefc5e5ad11ad1f68126c
+      - HTTP_POST_URL=http://127.0.0.1:8000/zen_articles/
+    command: bash
